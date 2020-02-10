@@ -76,6 +76,6 @@ this can be done by enable.idempotence=true (producer level).
 
 4. max.block.ms=60000 by default.
 
-if producer is producing at very high speed then the speed of consumer this can lead to overflow of buffer memory of producer which can give error.
+if producer is producing at very high speed then the speed of consumer this can lead to overflow of buffer memory of producer.It will wait for 60 secs if buffer memory is still full it will throw exception.
 
 
