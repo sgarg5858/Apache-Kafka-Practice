@@ -1,6 +1,8 @@
 # Apache-Kafka-Practice
 
-How to create high-throughput-producer while maintaining ordering of messages int topics and ensuring no data loss?
+1. How to create high-throughput-producer while maintaining ordering of messages int topics and ensuring no data loss?
+
+******************************************************************************
 
 We know if the producer is able to send messages fast the whole system benefits.
 
