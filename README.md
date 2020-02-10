@@ -65,7 +65,7 @@ Doing this can impact your throughput but will maintain order.
 ii). Use idempotent producer
 
 It maintains order by using producer and sequential id for every parition tracked by producer and on the broker side per-parition basis.
-If last id=newid-1 then partition won't add the record.
+If last id!=newid-1 then partition won't add the record.
 
 1.acks=all;
 2. ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION=5; by default;
