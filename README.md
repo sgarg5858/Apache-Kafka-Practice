@@ -11,7 +11,10 @@ Basic Properties:
 		properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 		properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
+***************************************************************************************************************************
+
 1.No data loss
+
 (i) For ensuring no data loss while sending data to kafka(topics/partitions) we must use (ack="all) this will need acknowledgement from
 leader and replicas.
 
@@ -19,20 +22,27 @@ leader and replicas.
 
 (iii)This will add a bit of latency but ensure no data loss.
 
+**************************************************************************************************************
 
 2.High throughput
+
 (i) Instead of sending messages alone we shouls send them in batches as we know batches are send per partition basis when sending messages with key so messages which are going to same parition can be batch together other wise not.This can be improved a bit by Sticky Partitoner.
+
 linger.ms is property that tells for how much time producer should wait before send the batch if batch size is full before then it will send right away.
-This can be set by 
+
+This can be set at the producer level.
+
 properties.setProperty(ProducerConfig.BATCH_SIZE_CONFIG, Integer.toString(32*1024))
 properties.setProperty(ProducerConfig.LINGER_MS_CONFIG, "20")
-at the producer level.
+
 
 (ii).we can also apply compression to batches to compress the size to send them fast over the network.
 //	properties.setProperty(ProducerConfig.COMPRESSION_TYPE_CONFIG, "snappy");
 
+**********************************************************************************************************************
 
 3.Order Maintain: 
+
 (i) Suppose if data is not recieved by broker or acknowledment is not recieved by producer it will retry then the order can be changed as there can be multiple requests in parallel.
 properties.setProperty(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, "5");
 
@@ -60,6 +70,7 @@ If last id=newid-1 then partition won't add the record.
 
 this can be done by enable.idempotence=true (producer level).
 
+*******************************************************************************************************************************
 
 4. max.block.ms=60000 by default.
 
